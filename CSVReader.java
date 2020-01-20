@@ -25,7 +25,7 @@ public class CSVReader {
         for(int i = 0; i < lineSplit.length; i++){
           lineSplit[i] = lineSplit[i].strip();
         }
-        rows.add(new ArrayList<String>(Arrays.asList(line)));
+        rows.add(new ArrayList<String>(Arrays.asList(lineSplit)));
       }
     } catch(IOException e){
       e.printStackTrace();

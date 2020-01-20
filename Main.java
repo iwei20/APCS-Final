@@ -6,10 +6,15 @@ public class Main {
     // Reader should only be called on the opening of a new file.
     JFrame frame = new JFrame("CSV Editor");
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    frame.setSize(900, 900);
-    JTable table = new JTable(new EditableTable(read.readRows()));
-    frame.getContentPane().add(table);
-    frame.setVisible(true);
 
+    JTable table = new JTable(new EditableTable(read.readRows()));
+    table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+    JScrollPane tablePane = new JScrollPane(table);
+
+    frame.getContentPane().add(tablePane);
+    frame.pack();
+    frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
+    frame.setVisible(true);
   }
 }
