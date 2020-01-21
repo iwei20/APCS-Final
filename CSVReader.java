@@ -46,4 +46,12 @@ public class CSVReader {
     return rows;
   }
 
+  public void close() {
+    try {
+      reader.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
 }

@@ -153,6 +153,7 @@ public class EditableTableModel extends AbstractTableModel implements ActionList
     String event = e.getActionCommand();
 
     if (event.equals("New")) {
+      currFile = null;
       data = new ArrayList<ArrayList<String>>();
       fireTableDataChanged();
       Main.frame.setTitle("CSV Editor");
@@ -186,6 +187,7 @@ public class EditableTableModel extends AbstractTableModel implements ActionList
           creader.open(file);
           data = creader.readRows();
           Main.frame.setTitle(file.toString());
+          creader.close();
 
         } else {
 
