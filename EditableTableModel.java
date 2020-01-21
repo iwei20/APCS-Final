@@ -26,6 +26,8 @@ public class EditableTableModel extends AbstractTableModel implements ActionList
 
   ArrayList<ArrayList<String>> data;
 
+  boolean saved;
+
   int rowCount;
   int columnCount;
 
@@ -46,6 +48,7 @@ public class EditableTableModel extends AbstractTableModel implements ActionList
     data = new ArrayList<ArrayList<String>>();
     chooser = new JFileChooser();
 
+    // Set file filter
     chooser.setAcceptAllFileFilterUsed(false);
     chooser.addChoosableFileFilter(new FileFilter() {
 
@@ -62,6 +65,8 @@ public class EditableTableModel extends AbstractTableModel implements ActionList
       }
 
     });
+
+    saved = true;
 
   }
 
@@ -119,6 +124,13 @@ public class EditableTableModel extends AbstractTableModel implements ActionList
   @Override
   public void setValueAt(Object value, int row, int col) {
     if (value.toString() != " " && value.toString() != "" && value.toString() != null){
+
+      // Asterick added
+      if (saved && !Main.frame.getTitle().equals("CSV Editor")) {
+        saved = false;
+        Main.frame.setTitle(Main.frame.getTitle() + "*");
+      }
+
       while (data.size() <= row) {
         data.add(new ArrayList<String>());
       }
@@ -183,6 +195,8 @@ public class EditableTableModel extends AbstractTableModel implements ActionList
 
     }
 
+    saved = true;
+
     fireTableDataChanged();
   }
 
@@ -209,7 +223,14 @@ public class EditableTableModel extends AbstractTableModel implements ActionList
         out.close();
 
         Main.frame.setTitle(file.toString());
+
+        // Take away the little asterick
+        if (!saved && !Main.frame.getTitle().equals("CSV Editor")) {
+          saved = true;
+          Main.frame.setTitle(Main.frame.getTitle().substring(0, Main.frame.getTitle().length() - 1));
+        }
     }
+
   }
 
   public void save() {
@@ -222,6 +243,12 @@ public class EditableTableModel extends AbstractTableModel implements ActionList
     out.open(currFile);
     out.printAll(data);
     out.close();
+
+    // Take away the asterick
+    if (!saved && !Main.frame.getTitle().equals("CSV Editor")) {
+      saved = true;
+      Main.frame.setTitle(Main.frame.getTitle().substring(0, Main.frame.getTitle().length() - 1));
+    }
 
   }
 

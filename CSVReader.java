@@ -12,6 +12,7 @@ public class CSVReader {
   public CSVReader() {
   }
 
+  // Opens the file
   public void open(File file) {
     try{
       reader = new BufferedReader(new FileReader(file));
@@ -24,6 +25,7 @@ public class CSVReader {
     open(new File(path));
   }
 
+  // Reads through the csv row by row, eliminating spaces at ends.
   public ArrayList<ArrayList<String>> readRows() {
     ArrayList<ArrayList<String>> rows = new ArrayList<ArrayList<String>>();
     String line;

@@ -26,10 +26,11 @@ public class CSVWriter {
     out.close();
   }
 
+  // Prints the ArrayList while eliminating the brackets
   public <E> void println(ArrayList<E> row){
     out.println(row.toString().substring(1, row.toString().length() - 1));
   }
-
+  
   public void printAll(ArrayList<ArrayList<String>> data) {
     for (ArrayList<String> row : data) {
       println(row);
